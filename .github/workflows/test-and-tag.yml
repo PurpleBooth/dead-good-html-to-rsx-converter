@@ -11,6 +11,8 @@ jobs:
     uses: PurpleBooth/common-pipelines/.github/workflows/rust-check.yml@main
   release:
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     needs:
       - rust-checks
     outputs:
