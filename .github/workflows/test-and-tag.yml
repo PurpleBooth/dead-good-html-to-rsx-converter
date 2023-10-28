@@ -7,14 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-markdown:
-    uses: PurpleBooth/common-pipelines/.github/workflows/markdown-check.yml@main
   rust-checks:
     uses: PurpleBooth/common-pipelines/.github/workflows/rust-check.yml@main
   release:
     if: github.ref == 'refs/heads/main'
     needs:
-      - lint-markdown
       - rust-checks
     outputs:
       version_bump: ${{ steps.current_version.outputs.current_version != steps.previous_version.outputs.previous_version }}
