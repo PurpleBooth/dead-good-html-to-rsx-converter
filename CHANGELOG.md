@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.1.0 - 2023-10-28
+#### Continuous Integration
+- Disable interaction on binstall - (7621197) - Billie Thompson
+- Use binstall for faster installs - (542433b) - Billie Thompson
+- Setup the cargo version bumping - (832ef2f) - Billie Thompson
+- Remove the markdown linting - (7dabdb1) - Billie Thompson
+#### Miscellaneous Chores
+- **(version)** 0.1.0 - (72b8fa7) - Billie Thompson
+
+- - -
+
 ## 0.1.0 - 2023-10-28
 #### Continuous Integration
 - Remove the markdown linting - (7dabdb1) - Billie Thompson
