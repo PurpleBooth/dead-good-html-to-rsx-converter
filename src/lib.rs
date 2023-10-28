@@ -49,6 +49,8 @@ fn to_rust_string(input: &str) -> String {
     format!("\"{}\"", escape_string(input))
 }
 
+const INDENTATION: usize = 4;
+
 /// Convert html into rsx
 ///
 /// # Errors
@@ -68,12 +70,11 @@ pub fn convert<'a>(input: impl Into<Cow<'a, str>>) -> Result<String> {
 
     let mut out = String::new();
     let mut indentation_level = 0;
-    let indentation = 4;
 
     while let Some(work) = work_stack.pop_front() {
         match work {
             Fragment::TlNode(Node::Tag(tag)) => {
-                out.push_str(" ".repeat(indentation_level * indentation).as_ref());
+                out.push_str(indentation_spaces(indentation_level).as_ref());
                 out.push_str(tag.name().try_as_utf8_str().unwrap_or_default());
                 out.push_str(" {");
 
@@ -98,13 +99,13 @@ pub fn convert<'a>(input: impl Into<Cow<'a, str>>) -> Result<String> {
                             if x == x.to_lowercase() {
                                 x
                             } else {
-                                format!("_{}", x.to_lowercase())
+                                ["_".to_string(), x.to_lowercase()].concat()
                             }
                         })
                         .collect::<String>();
 
                     out.push('\n');
-                    out.push_str(" ".repeat((indentation_level + 1) * indentation).as_ref());
+                    out.push_str(indentation_spaces(indentation_level + 1).as_str());
                     out.push_str(key.as_ref());
                     out.push_str(": ");
                     out.push_str(value.as_ref());
@@ -112,7 +113,7 @@ pub fn convert<'a>(input: impl Into<Cow<'a, str>>) -> Result<String> {
                 }
                 if tag.children().start().is_none() && !tag.attributes().is_empty() {
                     out.push('\n');
-                    out.push_str(" ".repeat((indentation_level) * indentation).as_ref());
+                    out.push_str(indentation_spaces(indentation_level).as_ref());
                 }
 
                 if tag.children().start().is_none() {
@@ -136,12 +137,12 @@ pub fn convert<'a>(input: impl Into<Cow<'a, str>>) -> Result<String> {
                 }
             }
             Fragment::TlNode(Node::Raw(text)) => {
-                out.push_str(" ".repeat(indentation_level * indentation).as_ref());
+                out.push_str(" ".repeat(indentation_level * INDENTATION).as_ref());
                 out.push_str(to_rust_string(text.try_as_utf8_str().unwrap_or_default()).as_ref());
                 out.push('\n');
             }
             Fragment::TlNode(Node::Comment(comment)) => {
-                out.push_str(" ".repeat(indentation_level * indentation).as_ref());
+                out.push_str(indentation_spaces(indentation_level).as_ref());
                 out.push_str("// ");
                 out.push_str(
                     comment
@@ -154,13 +155,17 @@ pub fn convert<'a>(input: impl Into<Cow<'a, str>>) -> Result<String> {
             }
             Fragment::ClosingBrace => {
                 indentation_level -= 1;
-                out.push_str(" ".repeat(indentation_level * indentation).as_ref());
+                out.push_str(indentation_spaces(indentation_level).as_ref());
                 out.push_str("}\n");
             }
         }
     }
 
     Ok(out)
+}
+
+fn indentation_spaces(indentation_level: usize) -> String {
+    " ".repeat(indentation_level * INDENTATION)
 }
 
 #[cfg(test)]
