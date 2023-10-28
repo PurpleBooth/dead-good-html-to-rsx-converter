@@ -24,10 +24,12 @@ jobs:
           fetch-depth: 0
       - name: Get tags
         run: git fetch --tags origin
+      - name: Install cargo-binstall
+        uses: cargo-bins/cargo-binstall@v1.4.4
       - shell: bash
-        run: cargo install cargo-edit
+        run: cargo binstall cargo-edit
       - shell: bash
-        run: cargo install --locked cocogitto
+        run: cargo binstall cocogitto
       - id: previous_version
         run: |
           cog get-version | tee .version
