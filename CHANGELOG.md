@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.2.0 - 2023-10-28
+#### Build system
+- Publish the package with cog - (069b27c) - Billie Thompson
+- Correct homepage - (9a94db7) - Billie Thompson
+#### Features
+- Derive diagnostic for errors - (eb34cd5) - Billie Thompson
+
+- - -
+
 ## v0.1.1 - 2023-10-28
 #### Bug Fixes
 - Reduce duplication of space generation - (6573f2d) - Billie Thompson
