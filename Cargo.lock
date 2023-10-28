@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "dead-good-html-to-rsx-converter"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "indoc",
  "thiserror",

@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.1.1 - 2023-10-28
+#### Bug Fixes
+- Reduce duplication of space generation - (6573f2d) - Billie Thompson
+#### Continuous Integration
+- Give the pipeline permissions to push the repo for releases - (dd7fc67) - Billie Thompson
+
+- - -
+
 ## v0.1.0 - 2023-10-28
 #### Continuous Integration
 - Disable interaction on binstall - (7621197) - Billie Thompson

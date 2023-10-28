@@ -1,6 +1,6 @@
 [package]
 name = "dead-good-html-to-rsx-converter"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "Unlicense"
 description = "Convert html into rsx."
