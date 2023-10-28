@@ -27,9 +27,9 @@ jobs:
       - name: Install cargo-binstall
         uses: cargo-bins/cargo-binstall@v1.4.4
       - shell: bash
-        run: cargo binstall cargo-edit
+        run: cargo binstall --no-confirm cargo-edit
       - shell: bash
-        run: cargo binstall cocogitto
+        run: cargo binstall --no-confirm cocogitto
       - id: previous_version
         run: |
           cog get-version | tee .version
