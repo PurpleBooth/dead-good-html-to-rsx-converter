@@ -40,6 +40,8 @@ jobs:
         shell: bash
       - name: Semver release
         id: release
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_TOKEN }}
         run: |
           git config --global user.name "cog-bot"
           git config --global user.email "cog@example.com"
@@ -50,14 +52,3 @@ jobs:
           echo "current_version=$( cat .version )"  >> "$GITHUB_OUTPUT"
           rm .version
         shell: bash
-
-  publish-to-cargo:
-    if: needs.release.outputs.version_bump
-    needs:
-      - release
-    uses: PurpleBooth/common-pipelines/.github/workflows/release-rust-library.yml@main
-    with:
-      current_version: ${{ needs.release.outputs.current_version }}
-      previous_version: ${{ needs.release.outputs.previous_version }}
-    secrets:
-      cargo_token: ${{ secrets.CARGO_TOKEN }}
