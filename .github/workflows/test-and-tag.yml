@@ -9,6 +9,7 @@ on:
 jobs:
   rust-checks:
     uses: PurpleBooth/common-pipelines/.github/workflows/rust-check.yml@main
+
   release:
     if: github.ref == 'refs/heads/main'
     permissions:
