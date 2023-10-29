@@ -2,7 +2,7 @@ pull_request_rules:
   - name: "Automatic merge when CI passes"
     conditions:
       - author=dependabot[bot]
-      - check-success=all-tests-succeeded
+      - check-success=rust-checks
     actions:
       queue:
         method: merge
