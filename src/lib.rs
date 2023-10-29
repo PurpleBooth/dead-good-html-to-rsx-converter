@@ -102,7 +102,8 @@ pub fn convert<'a>(input: impl Into<Cow<'a, str>>) -> Result<String> {
                                 ["_".to_string(), x.to_lowercase()].concat()
                             }
                         })
-                        .collect::<String>();
+                        .collect::<String>()
+                        .replace('-', "_");
 
                     out.push('\n');
                     out.push_str(indentation_spaces(indentation_level + 1).as_str());
@@ -254,6 +255,21 @@ mod tests {
         div {
             class: \"example\",
             id: \"id\",
+        }
+        "};
+        let actual = convert(input);
+        assert_eq!(actual.expect("Failed to convert html"), expected);
+    }
+
+    #[test]
+    fn div_with_irregular_attributes() {
+        let input = indoc! {r#"
+        <div stroke-linecap="round" ></div>
+        "#};
+
+        let expected = indoc! {"
+        div {
+            stroke_linecap: \"round\",
         }
         "};
         let actual = convert(input);
