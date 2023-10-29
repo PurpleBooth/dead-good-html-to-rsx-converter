@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.3.0 - 2023-10-29
+#### Features
+- Support hyphenated parameters - (7adfdeb) - Billie Thompson
+
+- - -
+
 ## v0.2.0 - 2023-10-28
 #### Build system
 - Publish the package with cog - (069b27c) - Billie Thompson
